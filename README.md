@@ -3,7 +3,8 @@ A simple PHP script for storing data from [Overland](https://overland.p3k.app/) 
 
 ```
 Logging URL: https://$INSTANCE_URL/?key=$KEY
-CSV API URL: https://$INSTANCE_URL/?key=$KEY&csv=true
+Last 500 Rows: https://$INSTANCE_URL/?key=$KEY&csv=true
+All Rows: https://$INSTANCE_URL/?key=$KEY&csv=true&full=true
 ```
 ## config.json
 Rename `config.example.json` to `config.json` and edit the values.
