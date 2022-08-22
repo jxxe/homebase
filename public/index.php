@@ -35,7 +35,12 @@ mandate(401, isset($_GET['key']) && $_GET['key'] === $config['key']); # Unauthor
 $database = new SQLite3('../private/database.sqlite3');
 
 if($_GET['csv'] ?? false && $config['enable_csv_endpoint'] ?? false) {
-    $query = $database->query('SELECT * FROM points ORDER BY timestamp');
+    if($_GET['full'] ?? false) {
+        $query = $database->query('SELECT * FROM points ORDER BY timestamp');
+    } else {
+        $query = $database->query('SELECT * FROM (SELECT * FROM points ORDER BY timestamp DESC LIMIT 500) AS t ORDER BY timestamp');
+    }
+
     $rows = collect(fn() => $query->fetchArray(SQLITE3_ASSOC));
     $csv = array_to_csv($rows);
     header('content-type: text/plain');
